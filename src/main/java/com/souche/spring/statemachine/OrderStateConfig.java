@@ -22,7 +22,7 @@ import java.util.EnumSet;
 public class OrderStateConfig extends EnumStateMachineConfigurerAdapter<OrderStateEnum,OrderEventEnum> {
 
     @Autowired
-    private AbstractAction testSignContractAction;
+    private AbstractAction payDepositPartAction;
 
     @Autowired
     private AbstractAction signContractAction;
@@ -35,7 +35,7 @@ public class OrderStateConfig extends EnumStateMachineConfigurerAdapter<OrderSta
     @Override
     public void configure(StateMachineTransitionConfigurer<OrderStateEnum, OrderEventEnum> transitions) throws Exception {
         transitions.withExternal()
-                .source(OrderStateEnum.WAITPAY).target(OrderStateEnum.SIGN_CONTRACT).event(OrderEventEnum.SIGN_CONTRACT_EVENT).action(testSignContractAction).action(signContractAction)
-                .and().withExternal().source(OrderStateEnum.SIGN_CONTRACT).target(OrderStateEnum.PAYING).event(OrderEventEnum.PAY_DEPOSIT_PART_EVENT);
+                .source(OrderStateEnum.WAITPAY).target(OrderStateEnum.SIGN_CONTRACT).event(OrderEventEnum.SIGN_CONTRACT_EVENT).action(signContractAction)
+                .and().withExternal().source(OrderStateEnum.SIGN_CONTRACT).target(OrderStateEnum.PAYING).event(OrderEventEnum.PAY_DEPOSIT_PART_EVENT).action(payDepositPartAction);
     }
 }

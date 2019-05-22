@@ -5,10 +5,8 @@ package com.souche.spring.statemachine;
  */
 public enum OrderEventEnum {
 
-    CREATE_ORDER_EVENT("创建销售订单"),
     SIGN_CONTRACT_EVENT("签署电子合同"),
-    PAY_DEPOSIT_PART_EVENT("部分支付定金"),
-    PAY_DEPOSIT_ALL_EVENT("定金支付完成");
+    PAY_DEPOSIT_PART_EVENT("部分支付定金");
 
     private String  name;
 
