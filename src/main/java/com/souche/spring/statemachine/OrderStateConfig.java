@@ -36,6 +36,9 @@ public class OrderStateConfig extends EnumStateMachineConfigurerAdapter<OrderSta
     public void configure(StateMachineTransitionConfigurer<OrderStateEnum, OrderEventEnum> transitions) throws Exception {
         transitions.withExternal()
                 .source(OrderStateEnum.WAITPAY).target(OrderStateEnum.SIGN_CONTRACT).event(OrderEventEnum.SIGN_CONTRACT_EVENT).action(signContractAction)
-                .and().withExternal().source(OrderStateEnum.SIGN_CONTRACT).target(OrderStateEnum.PAYING).event(OrderEventEnum.PAY_DEPOSIT_PART_EVENT).action(payDepositPartAction);
+                .and().withExternal()
+
+                //签署合同完成之后支付定金
+                .source(OrderStateEnum.SIGN_CONTRACT).target(OrderStateEnum.PAYING).event(OrderEventEnum.PAY_DEPOSIT_PART_EVENT).action(payDepositPartAction);
     }
 }
