@@ -26,15 +26,14 @@ public class SpringStatemachineApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		//
-		parentStateMachine.start();
+		//parentStateMachine.start();
 
 		stateMachine.start();
 		stateMachine.sendEvent(OrderEventEnum.SIGN_CONTRACT_EVENT);
 		stateMachine.sendEvent(OrderEventEnum.PAY_DEPOSIT_PART_EVENT);
 
-		stateMachine.sendEvent(OrderEventEnum.SIGN_CONTRACT_EVENT);
-		stateMachine.sendEvent(OrderEventEnum.PAY_DEPOSIT_PART_EVENT);
+/*		stateMachine.sendEvent(OrderEventEnum.SIGN_CONTRACT_EVENT);
+		stateMachine.sendEvent(OrderEventEnum.PAY_DEPOSIT_PART_EVENT);*/
 	}
 
 
