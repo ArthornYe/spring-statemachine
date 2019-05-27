@@ -1,4 +1,4 @@
-package com.souche.spring.statemachine;
+package com.souche.spring.statemachine.StateConfigs.OrderStateConfigs;
 
 /**
  * 定义可以变更的所有节点

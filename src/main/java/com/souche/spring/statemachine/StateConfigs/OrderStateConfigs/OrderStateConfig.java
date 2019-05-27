@@ -1,10 +1,11 @@
-package com.souche.spring.statemachine;
+package com.souche.spring.statemachine.StateConfigs.OrderStateConfigs;
 
 import com.souche.spring.statemachine.actions.AbstractAction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.statemachine.config.EnableStateMachine;
 import org.springframework.statemachine.config.EnumStateMachineConfigurerAdapter;
+import org.springframework.statemachine.config.builders.StateMachineConfigurationConfigurer;
 import org.springframework.statemachine.config.builders.StateMachineStateConfigurer;
 import org.springframework.statemachine.config.builders.StateMachineTransitionConfigurer;
 
@@ -12,6 +13,7 @@ import java.util.EnumSet;
 
 /**
  * 定义了状态节点跳转
+ * 有限状态机四个要素：状态（state），事件（event），流转（transaction），action（动作）
  * 第一个config定义初始化当前状态机拥有哪些状态
  * 第二个config定义source，target，和对应触发的event事件
  * 执行 stateMachine.start()方法初始化配置，先加载所有的transactions再加载当前状态机的所有状态
@@ -40,5 +42,10 @@ public class OrderStateConfig extends EnumStateMachineConfigurerAdapter<OrderSta
 
                 //签署合同完成之后支付定金
                 .source(OrderStateEnum.SIGN_CONTRACT).target(OrderStateEnum.PAYING).event(OrderEventEnum.PAY_DEPOSIT_PART_EVENT).action(payDepositPartAction);
+    }
+
+    @Override
+    public void configure(StateMachineConfigurationConfigurer<OrderStateEnum, OrderEventEnum> config) throws Exception {
+        super.configure(config);
     }
 }
