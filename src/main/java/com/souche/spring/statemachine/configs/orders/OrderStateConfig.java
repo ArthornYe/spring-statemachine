@@ -66,7 +66,7 @@ public class OrderStateConfig extends EnumStateMachineConfigurerAdapter<OrderSta
             @Override
             public void transition(Transition<OrderStateEnum, OrderEventEnum> transition) {
                 if(transition.getTarget().getId() == OrderStateEnum.SIGN_CONTRACT){
-                    System.out.println("监听器监听到转移事件正在执行...");
+                    System.out.println("自定义监听器监听到签署合同状态转移事件正在执行...");
                 }
                 return;
             }
@@ -74,7 +74,7 @@ public class OrderStateConfig extends EnumStateMachineConfigurerAdapter<OrderSta
             @Override
             public void transitionStarted(Transition<OrderStateEnum, OrderEventEnum> transition) {
                 if(transition.getTarget().getId() == OrderStateEnum.SIGN_CONTRACT){
-                    System.out.println("监听器监听到转移事件开始执行...");
+                    System.out.println("自定义监听器监听到签署合同状态转移事件开始执行...");
                 }
                 return;
             }
@@ -82,7 +82,7 @@ public class OrderStateConfig extends EnumStateMachineConfigurerAdapter<OrderSta
             @Override
             public void transitionEnded(Transition<OrderStateEnum, OrderEventEnum> transition) {
                 if(transition.getTarget().getId() == OrderStateEnum.SIGN_CONTRACT){
-                    System.out.println("监听器监听到转移事件结束执行...");
+                    System.out.println("自定义监听器监听到签署合同状态转移事件结束执行...");
                 }
                 return;
             }
