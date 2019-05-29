@@ -1,13 +1,17 @@
-package com.souche.spring.statemachine.StateConfigs.OrderStateConfigs;
+package com.souche.spring.statemachine.configs.orders;
 
 import com.souche.spring.statemachine.actions.AbstractAction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.statemachine.config.EnableStateMachine;
 import org.springframework.statemachine.config.EnumStateMachineConfigurerAdapter;
 import org.springframework.statemachine.config.builders.StateMachineConfigurationConfigurer;
 import org.springframework.statemachine.config.builders.StateMachineStateConfigurer;
 import org.springframework.statemachine.config.builders.StateMachineTransitionConfigurer;
+import org.springframework.statemachine.listener.StateMachineListener;
+import org.springframework.statemachine.listener.StateMachineListenerAdapter;
+import org.springframework.statemachine.transition.Transition;
 
 import java.util.EnumSet;
 
@@ -31,12 +35,15 @@ public class OrderStateConfig extends EnumStateMachineConfigurerAdapter<OrderSta
 
     @Override
     public void configure(StateMachineStateConfigurer<OrderStateEnum, OrderEventEnum> states) throws Exception {
-        states.withStates().initial(OrderStateEnum.WAITPAY).states(EnumSet.allOf(OrderStateEnum.class));
+        states
+                .withStates()
+                .initial(OrderStateEnum.WAITPAY).states(EnumSet.allOf(OrderStateEnum.class));
     }
 
     @Override
     public void configure(StateMachineTransitionConfigurer<OrderStateEnum, OrderEventEnum> transitions) throws Exception {
-        transitions.withExternal()
+        transitions
+                .withExternal()
                 .source(OrderStateEnum.WAITPAY).target(OrderStateEnum.SIGN_CONTRACT).event(OrderEventEnum.SIGN_CONTRACT_EVENT).action(signContractAction)
                 .and().withExternal()
 
@@ -46,6 +53,39 @@ public class OrderStateConfig extends EnumStateMachineConfigurerAdapter<OrderSta
 
     @Override
     public void configure(StateMachineConfigurationConfigurer<OrderStateEnum, OrderEventEnum> config) throws Exception {
-        super.configure(config);
+        config
+                .withConfiguration()
+                .autoStartup(true)
+                .listener(listener());
+
+    }
+
+    @Bean
+    public StateMachineListener<OrderStateEnum,OrderEventEnum> listener(){
+        return new StateMachineListenerAdapter<OrderStateEnum,OrderEventEnum>() {
+            @Override
+            public void transition(Transition<OrderStateEnum, OrderEventEnum> transition) {
+                if(transition.getTarget().getId() == OrderStateEnum.SIGN_CONTRACT){
+                    System.out.println("监听器监听到转移事件正在执行...");
+                }
+                return;
+            }
+
+            @Override
+            public void transitionStarted(Transition<OrderStateEnum, OrderEventEnum> transition) {
+                if(transition.getTarget().getId() == OrderStateEnum.SIGN_CONTRACT){
+                    System.out.println("监听器监听到转移事件开始执行...");
+                }
+                return;
+            }
+
+            @Override
+            public void transitionEnded(Transition<OrderStateEnum, OrderEventEnum> transition) {
+                if(transition.getTarget().getId() == OrderStateEnum.SIGN_CONTRACT){
+                    System.out.println("监听器监听到转移事件结束执行...");
+                }
+                return;
+            }
+        };
     }
 }

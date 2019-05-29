@@ -1,4 +1,4 @@
-package com.souche.spring.statemachine.StateConfigs.OrderStateConfigs;
+package com.souche.spring.statemachine.configs.orders;
 
 /**
  * 定义触发节点变更的所有事件

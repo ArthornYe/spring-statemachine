@@ -1,7 +1,7 @@
 package com.souche.spring.statemachine.actions;
 
-import com.souche.spring.statemachine.StateConfigs.OrderStateConfigs.OrderEventEnum;
-import com.souche.spring.statemachine.StateConfigs.OrderStateConfigs.OrderStateEnum;
+import com.souche.spring.statemachine.configs.orders.OrderEventEnum;
+import com.souche.spring.statemachine.configs.orders.OrderStateEnum;
 import org.springframework.statemachine.StateContext;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +14,7 @@ public class PayDepositPartAction extends AbstractAction {
 
     @Override
     public void execute(StateContext<OrderStateEnum, OrderEventEnum> stateContext) {
-        super.execute(stateContext);
-        //
-        System.out.println("执行付定金事件对应动作");
+        //支付定金action
+        System.out.println("执行付定金事件对应动作...");
     }
 }

@@ -1,4 +1,4 @@
-package com.souche.spring.statemachine.StateConfigs.ParentStateConfigs;
+package com.souche.spring.statemachine.configs.parents;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

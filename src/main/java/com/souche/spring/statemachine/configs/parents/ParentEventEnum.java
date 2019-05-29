@@ -1,4 +1,4 @@
-package com.souche.spring.statemachine.StateConfigs.ParentStateConfigs;
+package com.souche.spring.statemachine.configs.parents;
 
 /**
  * @autor yeqiaozhu.
